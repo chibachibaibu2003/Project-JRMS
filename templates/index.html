@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/login.css')}}">
+{% endblock %}
+
+{% block title%}
+<span style="color:black">　-ログイン<span>
+{% endblock %}
+
+{% block content %}
+<a class="titlelogo">ログイン画面</a>
+<div class="loginbox">
+	<div class="searchbox">
+    
+		<form action="./" method="post">
+			<a>メールアドレス</a><br>
+			<input type="email"name="email"class="search_a"autocomplete="off"><br><br>
+			<a>パスワード</a><br>
+			<input type="password"name="pass"class="search_b"autocomplete="off"><br><br>
+			<a class="submit"><input type="submit"class="button_s"value="ログイン"></a>
+		</form>
+	</div>
+</div>
+{% endblock %}
