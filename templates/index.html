@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<a class="titlelogo">ログイン画面</a>
+<p class="titlelogo">ログイン画面</p>
 <div class="loginbox">
 	<div class="searchbox">
     
@@ -16,7 +16,7 @@
 			<a>メールアドレス</a><br>
 			<input type="email"name="email"class="search_a"autocomplete="off"><br><br>
 			<a>パスワード</a><br>
-			<input type="pw"name="pass"class="search_b"autocomplete="off"><br><br>
+			<input type="password"name="pass"class="search_b"autocomplete="off"><br><br>
 			<a class="submit"><input type="submit"class="button_s"value="ログイン"></a>
 			<a class="register" href="{{url_for('register_page')}}">新規登録</a>
 		</form>

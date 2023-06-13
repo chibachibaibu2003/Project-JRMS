@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
+{% endblock %}
+
+{% block title%}
+<span style="color:black">　-新規登録<span>
+{% endblock %}
+
+{% block content %}
+<p class="titlelogo">新規登録</p>
+
+<div class="loginbox">
+	<div class="searchbox">
+    
+		<form action="{{url_for('login')}}" method="post">
+			<a>メールアドレス</a><br>
+			<input type="email"name="email"class="search_a"autocomplete="off"><br><br><br><br>
+			<a class="submit"><input type="submit"class="button_s"value="つぎへ"></a>
+			<a class="register" href="{{url_for('sample_top')}}">ログイン画面へ</a>
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+body{
+	padding:0;
+	margin: 0;
+}
+
+.loginbox{
+	max-width: 600px;
+	margin:auto;
+	margin-top: 10px;
+	margin-left: 350px;
+	justify-content: center;
+}
+
+.titlelogo{
+	display: flex;
+	font-size:3rem;
+    justify-content: center;
+    text-decoration:none;
+    color:black;
+}
+
+.searchbox{
+	display: flex;
+	justify-content: center;
+	padding-top: 30px;
+}
+
+
+.search_a{
+	width: 500px;
+	height: 50px;
+	background: #fff;
+	border: 2px solid #707070;
+	margin-top:0px ;
+	font-size: 1.5rem;	
+}
+
+
+.search_b{
+	width: 500px;
+	height: 50px;
+	background: #fff;
+	border: 2px solid #707070;
+	font-size: 1.5rem;	
+}
+
+.button{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	width:150px;
+	height:40px;
+	background-color: #58ABFD;
+	border:2px solid #707070;
+	color: white;
+	font-size: 1.5rem;
+	text-decoration: none;
+}
+
+.button:hover{
+	color:#58ABFD;
+	background-color: white;
+}
+
+.submit{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.button_s{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	width:150px;
+	height:40px;
+	background-color: #58ABFD;
+	border:2px solid #707070;
+	color: white;
+	font-size: 1.5rem;
+	text-decoration: none;
+}
+
+.button_s:hover{
+	color:#58ABFD;
+	background-color: white;
+}
+
+
+.button_a{
+	display: flex;
+	width: 700px;
+  	height: 40px;
+  	font-size: 1.8rem;
+  	text-align: center;
+  	padding: 10px 0px;
+  	background-color:whitesmoke;
+  	border:1px solid black;
+  	text-align: center;
+  	text-decoration: none;
+  	color:black;
+  	transform: translate(300px,100px);
+}
+
+.button_a:hover{
+	color:gray;
+}
+
+.register{
+	display: flex;
+	text-decoration: none;
+	color:#58ABFD;
+	justify-content: center;
+	font-size: 1.5rem;
+	padding-top: 10px;
+}
