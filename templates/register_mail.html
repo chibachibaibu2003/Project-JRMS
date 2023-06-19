@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/register.css')}}">
+{% endblock %}
+
+{% block title%}
+<span style="color:black">　-新規登録<span>
+{% endblock %}
+
+{% block content %}
+<p class="titlelogo">新規登録</p>
+
+<p class="message">
+    登録したメールアドレスに<br>
+    パスワード設定用のメールアドレスを送信しました。
+</p>
+<a class="register" href="{{url_for('sample_top')}}">ログイン画面へ</a>
+{% endblock %}
+

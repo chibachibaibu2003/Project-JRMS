@@ -17,5 +17,10 @@ def login():
 def register_page():
     return render_template('register.html')
 
+@app.route('/register2',methods=['POST'])
+def register_mail_page():
+    emali=request.form.get('email')
+    return render_template('register_mail.html',email=emali)
+
 if __name__ == "__main__":
     app.run(debug=True)

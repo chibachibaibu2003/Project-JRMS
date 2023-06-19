@@ -5,6 +5,15 @@ body{
 	margin: 0;
 }
 
+.message{
+	display:flex;
+	font-size: 1.5rem;
+	justify-content: center;
+	text-align: center;
+	margin-top: 60px;
+	text-decoration: none;
+}
+
 .loginbox{
 	max-width: 600px;
 	margin:auto;
