@@ -20,7 +20,14 @@ def register_page():
 @app.route('/register2',methods=['POST'])
 def register_mail_page():
     emali=request.form.get('email')
-    return render_template('register_mail.html',email=emali)
+    return render_template('register_2.html',email=emali)
+
+@app.route('/register3',methods=["POST"])
+def register_pass_page():
+    email=request.form.get('email')
+    pass1=request.form.get('pass1')
+    pass2=request.form.get('pass2')
+    return render_template('register_comp.html',email=email,pass1=pass1,pass2=pass2)    
 
 if __name__ == "__main__":
     app.run(debug=True)

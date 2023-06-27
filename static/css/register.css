@@ -19,7 +19,8 @@ body{
 	margin:auto;
 	margin-top: 10px;
 	margin-left: 350px;
-	justify-content: center;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .titlelogo{
