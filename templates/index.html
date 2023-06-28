@@ -8,14 +8,17 @@
 {% endblock %}
 
 {% block content %}
-<p class="titlelogo">ログイン画面</p>
+<p class="titlelogo">ログイン画面</p><br>
+{% if msg != null%}
+	<a style="color:blue"class="msg">{{msg}}</a><br>
+{% endif %}
 <div class="loginbox">
 	<div class="searchbox">
 		<form action="{{url_for('login')}}" method="post">
 			<a>メールアドレス</a><br>
 			<input type="email"name="email"class="search_a"autocomplete="off"><br><br>
 			<a>パスワード</a><br>
-			<input type="password"name="pass"class="search_b"autocomplete="off"><br><br>
+			<input type="password"name="pw"class="search_b"autocomplete="off"><br><br>
 			<a class="submit"><input type="submit"class="button_s"value="ログイン"></a>
 			<a class="register" href="{{url_for('register_page')}}">新規登録</a>
 		</form>

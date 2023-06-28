@@ -1,11 +1,16 @@
 from flask import Flask, render_template,redirect,url_for,request
-import random
+import random,db
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def sample_top():
-    return render_template('index.html')
+    msg=request.args.get('msg')
+    
+    if msg==None:
+        return render_template('index.html')
+    else:
+        return render_template('index.html',msg=msg)
 
 @app.route('/login',methods=['POST'])
 def login():
@@ -18,16 +23,28 @@ def register_page():
     return render_template('register.html')
 
 @app.route('/register2',methods=['POST'])
-def register_mail_page():
-    emali=request.form.get('email')
-    return render_template('register_2.html',email=emali)
-
-@app.route('/register3',methods=["POST"])
-def register_pass_page():
+def register_page2():
     email=request.form.get('email')
-    pass1=request.form.get('pass1')
-    pass2=request.form.get('pass2')
-    return render_template('register_comp.html',email=email,pass1=pass1,pass2=pass2)    
-
+    pw=request.form.get('pw')
+    
+    count=db.insert_user(pw,email)
+    
+    if email=="" and pw=="" :
+        error='メールアドレスとパスワードを入力して下さい。'
+        return render_template('register.html',error=error)
+    elif email=="":
+        error='メールアドレスを入力して下さい。'
+        return render_template('register.html',error=error)
+    elif pw=="":
+        error='パスワードを入力して下さい。'
+        return render_template('register.html',error=error)
+    
+    if count==1:
+        msg='登録が完了しました。'
+        return redirect(url_for('sample_top',msg=msg))
+    else:
+        error='登録に失敗しました。'
+        return render_template('register.html',error=error)
+    
 if __name__ == "__main__":
     app.run(debug=True)

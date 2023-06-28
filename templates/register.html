@@ -8,15 +8,20 @@
 {% endblock %}
 
 {% block content %}
-<p class="titlelogo">新規登録</p>
+<p class="titlelogo">新規登録</p><br>
+
+{% if error != null %}
+	<a class="msg" style="color:red">{{error}}</a>
+{% endif %}
 
 <div class="loginbox">
 	<div class="searchbox">
-    
-		<form action="{{url_for('register_mail_page')}}" method="post">
+		<form action="{{url_for('register_page2')}}" method="post">
 			<a>メールアドレス</a><br>
-			<input type="email"name="email"class="search_a"autocomplete="off"><br><br><br><br>
-			<a class="submit"><input type="submit"class="button_s"value="つぎへ"></a>
+			<input type="email"name="email"class="search_a"autocomplete="off"><br><br>
+			<a>パスワード</a><br>
+			<input type="password"name="pw"class="search_b"autocomplete="off"><br><br>
+			<a class="submit"><input type="submit"class="button_s"value="新規登録"></a>
 			<a class="register" href="{{url_for('sample_top')}}">ログイン画面へ</a>
 		</form>
 	</div>
