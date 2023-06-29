@@ -12,11 +12,16 @@
 {% if msg != null%}
 	<a style="color:blue"class="msg">{{msg}}</a><br>
 {% endif %}
+
+{% if error != null%}
+	<a style="color:red"class="msg">{{error}}</a><br>
+{% endif %}
+
 <div class="loginbox">
 	<div class="searchbox">
 		<form action="{{url_for('login')}}" method="post">
 			<a>メールアドレス</a><br>
-			<input type="email"name="email"class="search_a"autocomplete="off"><br><br>
+			<input type="email"name="email"class="search_a"autocomplete="off"value="{{data.email if data is defined else '' }}"><br><br>
 			<a>パスワード</a><br>
 			<input type="password"name="pw"class="search_b"autocomplete="off"><br><br>
 			<a class="submit"><input type="submit"class="button_s"value="ログイン"></a>
