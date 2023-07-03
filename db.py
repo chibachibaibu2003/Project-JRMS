@@ -29,7 +29,7 @@ def insert_user(pw,mail):
     return count
 
 def login(mail,pw):
-    sql="select pass,salt from user_account where mail=%s"
+    sql="select pass,salt,user_lank from user_account where mail=%s"
     flg=False
     try:
         connection=get_connection()
@@ -41,12 +41,13 @@ def login(mail,pw):
             hashed_pw=get_hash(pw,salt)
             if hashed_pw== user[0]:
                 flg=True
+                lank=user[2]
     except psycopg2.DatabaseError :
         flg=False
     finally:
         cursor.close()
         connection.close()
-    return flg
+    return flg,lank
             
 def get_salt():
     charset=string.ascii_letters+string.digits

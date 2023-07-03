@@ -1,8 +1,13 @@
 from flask import Flask, render_template,redirect,url_for,request,session
+from admin import admin_bp
+from student import student_bp
 import random,string,db
 
 app = Flask(__name__)
 app.secret_key=''.join(random.choices(string.ascii_letters,k=256))
+
+app.register_blueprint(admin_bp)
+app.register_blueprint(student_bp)
 
 @app.route('/', methods=['GET'])
 def sample_top():
@@ -29,9 +34,13 @@ def login():
         input_data={'email':email,'password':pw}
         return render_template('index.html',error=error,data=input_data)
     
-    if db.login(email,pw):
+    if db.login(email,pw)[0]:
         session['user']=True
-        return redirect(url_for('mypage'))
+        lank=db.login(email,pw)[1]
+        if lank==0:
+            return redirect(url_for('mypage'))
+        else:
+            return redirect(url_for('admin_top'))
     else:
         error='ユーザー名またはパスワードが違います。'
         
@@ -41,8 +50,15 @@ def login():
 @app.route('/mypage')
 def mypage():
     if 'user' in session:
-        return render_template('top.html') # session があればmypage.html を表示
+        return render_template('student/top.html') # session があればmypage.html を表示
     else :
+        return redirect(url_for('sample_top'))
+    
+@app.route('/admin_top')
+def admin_top():
+    if 'user' in session:
+        return render_template('admin/top.html')
+    else:
         return redirect(url_for('sample_top'))
 
 @app.route('/register')
