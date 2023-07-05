@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/admin_top.css')}}">
+{% endblock %}
+
+{% block title%}
+<span style="color:black">　-マイメニュー<span>
+{% endblock %}
+
+{% block content %}
+<p class="titlelogo">メニュー画面</p><br>
+{% if msg != null%}
+	<a style="color:blue"class="msg">{{msg}}</a><br>
+{% endif %}
+
+{% if error != null%}
+	<a style="color:red"class="msg">{{error}}</a><br>
+{% endif %}
+<div class="flexbox">
+    <div class="buttonbox">
+        報告書検索
+        <a href="{{url_for('admin.menu')}}"></a>
+    </div>
+    <div class="buttonbox">
+        報告書作成
+        <a href="{{url_for('admin.menu')}}"></a>
+    </div>
+    <div class="buttonbox">
+        報告書修正
+        <a href="{{url_for('admin.menu')}}"></a>
+    </div>
+    <div class="buttonbox">
+        ログアウト
+        <a href="{{url_for('admin.logout')}}"></a>
+    </div>
+</div>
+{% endblock %}

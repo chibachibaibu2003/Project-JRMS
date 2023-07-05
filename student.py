@@ -20,3 +20,8 @@ def menu():
         return render_template('top.html')
     else:
         return redirect(url_for('sample_top'))
+    
+@student_bp.route('/logout')
+def logout():
+    session.pop('user',None)
+    return redirect(url_for('sample_top'))

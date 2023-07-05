@@ -50,7 +50,7 @@ def login():
 @app.route('/mypage')
 def mypage():
     if 'user' in session:
-        return render_template('student/top.html') # session があればmypage.html を表示
+        return render_template('student/top.html')
     else :
         return redirect(url_for('sample_top'))
     

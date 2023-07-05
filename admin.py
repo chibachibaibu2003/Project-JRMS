@@ -19,4 +19,9 @@ def menu():
     if 'user' in session:
         return render_template('top.html')
     else:
-        return redirect(url_for('sample_top'))    
+        return redirect(url_for('sample_top'))
+
+@admin_bp.route('/logout')
+def logout():
+    session.pop('user',None)
+    return redirect(url_for('sample_top'))    
