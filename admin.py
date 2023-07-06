@@ -17,7 +17,7 @@ def sample_top():
 @admin_bp.route('/menu')
 def menu():
     if 'user' in session:
-        return render_template('top.html')
+        return render_template('admin/top.html')
     else:
         return redirect(url_for('sample_top'))
 

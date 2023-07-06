@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block title%}
-<span style="color:black">　-マイメニュー<span>
+<a class="navbar-brand" href="{{url_for('student.menu')}}">就職活動報告書管理システム<span style="color:black">　-マイメニュー<span>
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
     </div>
     <div class="buttonbox">
         報告書作成
-        <a href="{{url_for('student.menu')}}"></a>
+        <a href="{{url_for('student.register')}}"></a>
     </div>
     <div class="buttonbox">
         報告書修正

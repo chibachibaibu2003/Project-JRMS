@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/user_register.css')}}">
+{% endblock %}
+
+{% block title%}
+<a class="navbar-brand" href="{{url_for('student.menu')}}">就職活動報告書管理システム<span style="color:black">　報告書作成<span>
+{% endblock %}
+
+{% block content %}
+{% if error != null%}
+	<a style="color:red"class="msg">{{error}}</a><br>
+{% endif %}
+<div class="flexbox">
+    <form action="{{url_for('student.register_confirm')}}"method="post">
+        <a>氏名</a><br>
+        <input type="text" name="name"class="search_a"autocomplete="off"><br>
+        <a>学科・コース</a><br>
+        <input type="text" name="course"class="search_a"autocomplete="off"><br>
+        <a>会社名</a><br>
+        <input type="text" name="company_name"class="search_a"autocomplete="off"><br>
+        <a>会社の電話番号</a><br>
+        <input type="number" name="company_tel"class="search_a"autocomplete="off"><br>
+        <a>所在地</a><br>
+        <input type="text" name="company_location"class="search_a"autocomplete="off"><br>
+        <a>職種</a><br>
+        <input type="text" name="occupation"class="search_a"autocomplete="off"><br>
+        <a>業種</a><br>
+        <select name="industory" required>
+            <option value="">選択してください</option>
+            <option value=""></option>
+        </select>
+    </form>
+</div>
+
+{% endblock %}
+

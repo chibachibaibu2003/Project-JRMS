@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+body{
+	padding:0;
+	margin: 0;
+}
+
+.msg{
+	display: flex;
+	justify-content: center;
+	font-size: 1.3rem;
+	text-align: center;
+	text-decoration: none;
+}

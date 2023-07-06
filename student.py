@@ -17,7 +17,21 @@ def sample_top():
 @student_bp.route('/menu')
 def menu():
     if 'user' in session:
-        return render_template('top.html')
+        return render_template('student/top.html')
+    else:
+        return redirect(url_for('sample_top'))
+    
+@student_bp.route('/register')
+def register():
+    if 'user' in session:
+        return render_template('student/register.html')
+    else:
+        return redirect(url_for('sample_top'))
+    
+@student_bp.route('/confirm')
+def register_confirm():
+    if 'user' in session:
+        return render_template('student/register.html')
     else:
         return redirect(url_for('sample_top'))
     
