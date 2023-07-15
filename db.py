@@ -36,6 +36,7 @@ def login(mail,pw):
         cursor=connection.cursor()
         cursor.execute(sql,(mail,))
         user=cursor.fetchone()
+        lank=0
         if user != None:
             salt=user[1]
             hashed_pw=get_hash(pw,salt)
@@ -44,6 +45,7 @@ def login(mail,pw):
                 lank=user[2]
     except psycopg2.DatabaseError :
         flg=False
+        lank=0
     finally:
         cursor.close()
         connection.close()

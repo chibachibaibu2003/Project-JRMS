@@ -12,40 +12,93 @@
 	<a style="color:red"class="msg">{{error}}</a><br>
 {% endif %}
 <div class="flexbox">
-    <form action="{{url_for('student.register_confirm')}}"method="post">
-        <a>氏名</a><br>
-        <input type="text" name="name"class="search_a"autocomplete="off"><br>
-        <a>学科・コース</a><br>
-        <input type="text" name="course"class="search_a"autocomplete="off"><br>
-        <a>会社名</a><br>
-        <input type="text" name="company_name"class="search_a"autocomplete="off"><br>
-        <a>会社の電話番号</a><br>
-        <input type="number" name="company_tel"class="search_a"autocomplete="off"><br>
-        <a>所在地</a><br>
-        <input type="text" name="company_location"class="search_a"autocomplete="off"><br>
-        <a>職種</a><br>
-        <input type="text" name="occupation"class="search_a"autocomplete="off"><br>
-        <a>業種</a><br>
-        <select name="industory" required>
-            <option value="">選択してください</option>
-            <option value="IT">IT</option>
-            <option value="商社">商社</option>
-            <option value="金融">金融</option>
-            <option value="広告・出版">広告・出版</option>
-            <option value="サービス・インフラ">サービス・インフラ</option>
-            <option value="その他">その他</option>
-        </select><br>
-        <a>応募形態</a><br>
-        <select name="application" required>
-            <option value="">選択してください</option>
-            <option value="学校">学校</option>
-            <option value="自己開拓">自己開拓</option>
-            <option value="縁故">縁故</option>
-        </select><br>
-        <a>一次試験</a><br>
+    <form action="{{url_for('student.register_confirm')}}"method="post"><br><br>
+        <a>氏名<span style="color:red">　＊必須<span></a><br>
+        <input type="text" name="name"class="search_a"value="{{data.name if data is defined else ''}}"autocomplete="off"><br>
+        <a>学科・コース<span style="color:red">　＊必須<span></a></a><br>
+        <input type="text" name="course"class="search_a"value="{{data.course if data is defined else ''}}"autocomplete="off"><br>
+        <a>会社名<span style="color:red">　＊必須<span></a></a><br>
+        <input type="text" name="company_name"class="search_a"value="{{data.company_name if data is defined else ''}}"autocomplete="off"><br>
+        <a>会社の電話番号<span style="color:red">　＊必須<span></a></a><br>
+        <input type="number" name="company_tel"class="search_a"value="{{data.company_tel if data is defined else ''}}"autocomplete="off"><br>
+        <a>所在地<span style="color:red">　＊必須<span></a></a><br>
+        <input type="text" name="company_location"class="search_a"value="{{data.location if data is defined else ''}}"autocomplete="off"><br>
+        <a>職種<span style="color:red">　＊必須<span></a></a><br>
+        <input type="text" name="occupation"class="search_a"value="{{data.occupation if data is defined else ''}}"autocomplete="off"><br><br>
+        <div class="button_box">
+            <a>業種<span style="color:red">＊必須<span></a></a><br>
+            <select name="industory" required>
+                <option value="">選択してください</option>
+                <option value="IT">IT</option>
+                <option value="商社">商社</option>
+                <option value="金融">金融</option>
+                <option value="広告・出版">広告・出版</option>
+                <option value="サービス・インフラ">サービス・インフラ</option>
+                <option value="その他">その他</option>
+            </select><br>
+            <a>応募形態<span style="color:red">＊必須<span></a></a><br>
+            <select name="application" required>
+                <option value="">選択してください</option>
+                <option value="学校">学校</option>
+                <option value="自己開拓">自己開拓</option>
+                <option value="縁故">縁故</option>
+            </select>
+        </div><br>
+        
+        <a>一次試験<span style="color:red">　＊必須<span></a></a><br>
         <a>・日付</a><br>
-        <input type="date" name="date" required><br>
-        <textarea id="message" name="message"cols="60" rows="6"></textarea>
+        <input type="date" name="date_1"value="{{data.date_1 if data is defined else ''}}" required><br>
+        <a>・筆記</a><br>
+        <input type="text" name="test_1"class="search_a"value="{{data.test_1 if data is defined else ''}}"autocomplete="off"><br>
+        <a>・面接</a><br>
+        <input type="text" name="interview_1"class="search_a"value="{{data.interview_1 if data is defined else ''}}"autocomplete="off"><br><br>
+        
+        <a>二次試験：</a><input type="checkbox"><br>
+            <div class="seebox">
+                <a>・日付</a><br>
+                <input type="date" name="date_2"value="{{data.date_2 if data is defined else '2023-01-01'}}"required><br>
+                <a>・筆記</a><br>
+                <input type="text" name="test_2"class="search_a"value="{{data.test_2 if data is defined else ''}}"autocomplete="off"><br>
+                <a>・面接</a><br>
+                <input type="text" name="interview_2"class="search_a"value="{{data.interview_2 if data is defined else ''}}"autocomplete="off"><br><br>
+                
+                <a>三次試験：</a><input type="checkbox"><br>
+                <div class="seebox">
+                    <a>・日付</a><br>
+                    <input type="date" name="date_3"value="{{data.date_3 if data is defined else '2023-01-01'}}"required><br>
+                    <a>・筆記</a><br>
+                    <input type="text" name="test_3"class="search_a"value="{{data.test_3 if data is defined else ''}}"autocomplete="off"><br>
+                    <a>・面接</a><br>
+                    <input type="text" name="interview_3"class="search_a"value="{{data.interview_3 if data is defined else ''}}"autocomplete="off"><br><br>
+                    
+                    <a>四次試験：</a><input type="checkbox"class="check_1"><br>
+                    <div class="seebox">
+                        <a>・日付</a><br>
+                        <input type="date" name="date_4"value="{{data.date_4 if data is defined else '2023-01-01'}}" required><br>
+                        <a>・筆記</a><br>
+                        <input type="text" name="test_4"class="search_a"value="{{data.test_4 if data is defined else ''}}"autocomplete="off"><br>
+                        <a>・面接</a><br>
+                        <input type="text" name="interview_4"class="search_a"value="{{data.interview_4 if data is defined else ''}}"autocomplete="off"><br>
+                    </div>
+                </div>
+            </div><br>
+
+        <a>試験内容<span style="color:red">　＊必須<span></a></a><br>
+        <input type="text" name="report_test_1"class="search_b"value="{{data.report_test_1 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_2"class="search_b"value="{{data.report_test_2 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_3"class="search_b"value="{{data.report_test_3 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_4"class="search_b"value="{{data.report_test_4 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_5"class="search_b"value="{{data.report_test_5 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_6"class="search_b"value="{{data.report_test_6 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_7"class="search_b"value="{{data.report_test_7 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_8"class="search_b"value="{{data.report_test_8 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_9"class="search_b"value="{{data.report_test_9 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_10"class="search_b"value="{{data.report_test_10 if data is defined else ''}}"autocomplete="off"><br>
+        <input type="text" name="report_test_11"class="search_b"value="{{data.report_test_11 if data is defined else ''}}"autocomplete="off"><br><br>
+        <div class="button_box">
+            <button type="button" onclick="history.back()"class="button_s">戻る</button>
+            <input type="submit"class="button_s"value="提出">
+        </div><br>
     </form>
 </div>
 
