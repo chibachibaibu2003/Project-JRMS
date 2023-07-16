@@ -1,5 +1,7 @@
 from flask import Flask,Blueprint, render_template,redirect,url_for,request,session
-import random,string,db
+import random,string,shutil,pythoncom,os
+import win32com.client
+import openpyxl
 
 student_bp=Blueprint('student',__name__,url_prefix='/student')
 
@@ -33,7 +35,9 @@ def register_confirm():
     if 'user' in session:
         name=request.form.get('name')
         course=request.form.get('course')
+        student_num=request.form.get('student_num')
         comapany_name=request.form.get('company_name')
+        comapany_furigana=request.form.get('company_furigana')
         comapany_tel=request.form.get('company_tel')
         location=request.form.get('company_location')
         occupation=request.form.get('occupation')
@@ -64,14 +68,42 @@ def register_confirm():
         report_test_11=request.form.get('report_test_11')
         if name ==''or course==''or comapany_name==''or comapany_tel==''or location==''or occupation==''or industory==''or application==''or date_1=='' or report_test_1=='':
             error='全ての必須項目にデータを入力して下さい'
-            input_date={'name':name,'course':course,'company_name':comapany_name,'company_tel':comapany_tel,'location':location,'occupation':occupation,'industory':industory,'application':application,'date_1':date_1,'date_2':date_2,'date_3':date_3,'date_4':date_4,'test_1':test_1,'test_2':test_2,'test_3':test_3,'test_4':test_4,'interview_1':interview_1,'interview_2':interview_2,'interview_3':interview_3,'interview_4':interview_4,'report_test_1':report_test_1,'report_test_2':report_test_2,'report_test_3':report_test_3,'report_test_4':report_test_4,'report_test_5':report_test_5,'report_test_6':report_test_6,'report_test_7':report_test_7,'report_test_8':report_test_8,'report_test_9':report_test_9,'report_test_10':report_test_10,'report_test_11':report_test_11}
+            input_date={'name':name,'course':course,'student_num':student_num,'company_name':comapany_name,'company_furigana':comapany_furigana,'company_tel':comapany_tel,'location':location,'occupation':occupation,'industory':industory,'application':application,'date_1':date_1,'date_2':date_2,'date_3':date_3,'date_4':date_4,'test_1':test_1,'test_2':test_2,'test_3':test_3,'test_4':test_4,'interview_1':interview_1,'interview_2':interview_2,'interview_3':interview_3,'interview_4':interview_4,'report_test_1':report_test_1,'report_test_2':report_test_2,'report_test_3':report_test_3,'report_test_4':report_test_4,'report_test_5':report_test_5,'report_test_6':report_test_6,'report_test_7':report_test_7,'report_test_8':report_test_8,'report_test_9':report_test_9,'report_test_10':report_test_10,'report_test_11':report_test_11}
             return render_template('student/register.html',error=error,data=input_date)
         else:
-            input_date={'name':name,'course':course,'company_name':comapany_name,'company_tel':comapany_tel,'location':location,'occupation':occupation,'industory':industory,'application':application,'date_1':date_1,'date_2':date_2,'date_3':date_3,'date_4':date_4,'test_1':test_1,'test_2':test_2,'test_3':test_3,'test_4':test_4,'interview_1':interview_1,'interview_2':interview_2,'interview_3':interview_3,'interview_4':interview_4,'report_test_1':report_test_1,'report_test_2':report_test_2,'report_test_3':report_test_3,'report_test_4':report_test_4,'report_test_5':report_test_5,'report_test_6':report_test_6,'report_test_7':report_test_7,'report_test_8':report_test_8,'report_test_9':report_test_9,'report_test_10':report_test_10,'report_test_11':report_test_11}
-            return render_template('student/register.html')
+            input_date={'name':name,'course':course,'student_num':student_num,'company_name':comapany_name,'company_furigana':comapany_furigana,'company_tel':comapany_tel,'location':location,'occupation':occupation,'industory':industory,'application':application,'date_1':date_1,'date_2':date_2,'date_3':date_3,'date_4':date_4,'test_1':test_1,'test_2':test_2,'test_3':test_3,'test_4':test_4,'interview_1':interview_1,'interview_2':interview_2,'interview_3':interview_3,'interview_4':interview_4,'report_test_1':report_test_1,'report_test_2':report_test_2,'report_test_3':report_test_3,'report_test_4':report_test_4,'report_test_5':report_test_5,'report_test_6':report_test_6,'report_test_7':report_test_7,'report_test_8':report_test_8,'report_test_9':report_test_9,'report_test_10':report_test_10,'report_test_11':report_test_11}
+            session['input']=input_date
+            return redirect(url_for('student.register_confirm_2'))
     else:
         return redirect(url_for('sample_top'))
-    
+
+@student_bp.route('/confirm_2')
+def register_confirm_2():
+    input=session['input']
+    shutil.copy('./Project-JRMS/static/excel/Excelサンプル.xlsx','./Project-JRMS/static/excel/report_excel.xlsx')
+    wb = openpyxl.load_workbook('./Project-JRMS/static/excel/report_excel.xlsx')
+    sheet = wb['サンプル']
+    sheet['f12'].value=input['name']
+    wb.save('./Project-JRMS/static/excel/report_excel.xlsx')
+    wb.close()
+    pythoncom.CoInitialize()
+    excel = win32com.client.Dispatch("Excel.Application")
+    file = excel.Workbooks.Open('C:/Users/ibuch/Desktop/python/Project-JRMS/static/excel/report_excel.xlsx')
+    file.WorkSheets("サンプル").Activate()
+    file.ActiveSheet.ExportAsFixedFormat(0, f'C:/Users/ibuch/Desktop/python/Project-JRMS/static/pdf/view.pdf')
+    file.Close()
+    excel.Quit()
+    os.remove('C:/Users/ibuch/Desktop/python/Project-JRMS/static/excel/report_excel.xlsx')
+    return render_template('student/register_confirm.html')
+
+@student_bp.route('/menu_by_confirm')
+def menu_by_confirm():
+    if 'user' in session:
+        os.remove('C:/Users/ibuch/Desktop/python/Project-JRMS/static/pdf/view.pdf')
+        return redirect(url_for('student.menu'))
+    else:
+        return redirect(url_for('sample_top'))
+
 @student_bp.route('/logout')
 def logout():
     session.pop('user',None)
