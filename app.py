@@ -37,7 +37,9 @@ def login():
     if db.login(email,pw)[0]:
         session['user']=True
         lank=db.login(email,pw)[1]
+        id=db.login(email,pw)[2]
         if lank==0:
+            session['user_id']=id
             return redirect(url_for('mypage'))
         else:
             return redirect(url_for('admin_top'))

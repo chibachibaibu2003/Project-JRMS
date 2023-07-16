@@ -1,5 +1,5 @@
 from flask import Flask,Blueprint, render_template,redirect,url_for,request,session
-import random,string,shutil,pythoncom,os
+import random,string,shutil,pythoncom,os,db
 import win32com.client
 import openpyxl
 
@@ -32,6 +32,8 @@ def register():
     
 @student_bp.route('/confirm',methods=['POST'])
 def register_confirm():
+    if 'input' in session:
+        session.pop('user', None) 
     if 'user' in session:
         name=request.form.get('name')
         course=request.form.get('course')
@@ -94,6 +96,22 @@ def register_confirm_2():
     file.Close()
     excel.Quit()
     os.remove('C:/Users/ibuch/Desktop/python/Project-JRMS/static/excel/report_excel.xlsx')
+    
+    count=db.insert_report(input)
+    if count==1:
+        report_tuple=db.get_report_id()
+        report_id=report_tuple[0]
+        num=1
+        db.insert_report_2(report_id,num,input['date_1'],input['interview_1'],input['test_1'])
+        if input['test_2'] !='' or input['interview_2'] !='':
+            num =2
+            db.insert_report_2(report_id,num,input['date_2'],input['interview_2'],input['test_2'])
+        if input['test_3'] !='' or input['interview_3'] !='':
+            num =3
+            db.insert_report_2(report_id,num,input['date_3'],input['interview_3'],input['test_3'])
+        if input['test_4'] !='' or input['interview_4'] !='':
+            num =4
+            db.insert_report_2(report_id,num,input['date_4'],input['interview_4'],input['test_4'])
     return render_template('student/register_confirm.html')
 
 @student_bp.route('/menu_by_confirm')
