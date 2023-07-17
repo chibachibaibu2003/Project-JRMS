@@ -79,6 +79,7 @@ def register_confirm():
     else:
         return redirect(url_for('sample_top'))
 
+
 @student_bp.route('/confirm_2')
 def register_confirm_2():
     input=session['input']
