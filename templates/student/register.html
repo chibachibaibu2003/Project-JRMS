@@ -15,8 +15,16 @@
     <form action="{{url_for('student.register_confirm')}}"method="post"><br><br>
         <a>氏名<span style="color:red">　＊必須<span></a><br>
         <input type="text" name="name"class="search_a"value="{{data.name if data is defined else ''}}"autocomplete="off"><br>
-        <a>学科・コース<span style="color:red">　＊必須<span></a></a><br>
-        <input type="text" name="course"class="search_a"value="{{data.course if data is defined else ''}}"autocomplete="off"><br>
+        <a>学科・コース<span style="color:red">　＊必須<span></a><br>
+            <select name="course" required>
+                <option value="">選択してください</option>
+                <option value="情報システム科">情報システム科</option>
+                <option value="情報ビジネス科">情報ビジネス科</option>
+                <option value="高度情報工学科">高度情報工学科</option>
+                <option value="総合デザイン科">総合デザイン科</option>
+                <option value="デザイン科">デザイン科</option>
+                <option value="ゲームクリエイター科">ゲームクリエイター科</option>
+            </select><br>
         <a>学籍番号<span style="color:red">　＊必須<span></a></a><br>
         <input type="number" name="student_num"class="search_a"value="{{data.student_num if data is defined else ''}}"autocomplete="off"><br>
         <a>会社名<span style="color:red">　＊必須<span></a></a><br>

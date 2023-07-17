@@ -12,7 +12,8 @@ app.register_blueprint(student_bp)
 @app.route('/', methods=['GET'])
 def sample_top():
     msg=request.args.get('msg')
-    
+    if 'user' in session:
+        session.pop('user',None)
     if msg==None:
         return render_template('index.html')
     else:

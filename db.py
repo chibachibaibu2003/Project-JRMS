@@ -103,7 +103,7 @@ def get_report_id():
     return id
 
 def insert_report_2(id,num,date,interview,test):
-    sql='insert into report_test values(%s,%s,%s,%s,%s)'
+    sql='insert into report_test values(default,%s,%s,%s,%s,%s)'
     try:
         connection=get_connection()
         cursor=connection.cursor()
