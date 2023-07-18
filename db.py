@@ -116,3 +116,19 @@ def insert_report_2(id,num,date,interview,test):
         cursor.close()
         connection.close()
     return count
+
+def report_correction_list():
+    sql='select company_name,submission_date,report_id from report where approval_rank < 2'
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql)
+        list=cursor.fetchall()
+        
+    except psycopg2.DatabaseError :
+        list=((0,0,0),(0,0,0))
+    finally:
+        cursor.close()
+        connection.close()
+        # listはlist型です
+    return list

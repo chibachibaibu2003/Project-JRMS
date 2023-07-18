@@ -21,6 +21,14 @@ def menu():
     else:
         return redirect(url_for('sample_top'))
 
+@admin_bp.route('/correction')
+def correction_select():
+    if 'user' in session:
+        data_list=db.report_correction_list()
+        return render_template('admin/correction_select.html',datas=data_list)
+    else:
+        return redirect(url_for('sample_top'))
+
 @admin_bp.route('/logout')
 def logout():
     session.pop('user',None)
