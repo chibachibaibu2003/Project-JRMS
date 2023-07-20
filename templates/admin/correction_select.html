@@ -9,6 +9,9 @@
 
 {% block content %}
 <p class="titlelogo">報告書添削</p>
+<div class="submit">
+    <a class="button_s" href="{{url_for('admin.menu')}}">戻る</a>
+</div>
 <div class="tablebox">
     <table class="table">
         <thead>
@@ -21,8 +24,8 @@
         <tbody>
             {% for data in datas %}
             <tr>
-                <td><a href="" class="button_1st">{{ data[0] }}</a></td>
-                <td><a href="" class="button_2nd">{{ data[1] }}</a></td>
+                <td><a href="{{url_for('admin.correction',id=data[2])}}" class="button_1st">{{ data[0] }}</a></td>
+                <td><a href="{{url_for('admin.correction',id=data[2])}}" class="button_2nd">{{ data[1] }}</a></td>
             </tr>
             {% endfor %}
         </tbody>

@@ -132,3 +132,37 @@ def report_correction_list():
         connection.close()
         # listはlist型です
     return list
+
+def report_search(id):
+    sql="select * from report where report_id=%s"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        list=cursor.fetchone()
+    except psycopg2.DatabaseError :
+        list=((0,0,0),)
+    finally:
+        cursor.close()
+        connection.close()
+        # listはタプル型です
+    return list
+
+def report_test_search(id):
+    sql="select*from report_test where report_id=%s"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        list=cursor.fetchall()
+    except psycopg2.DatabaseError :
+        list=((0,0,0),)
+    finally:
+        cursor.close()
+        connection.close()
+        # listはタプル型です
+    return list
+
+list=report_test_search(31)
+print(list[0][5])
+print(len(list))

@@ -7,7 +7,7 @@ body{
 
 .titlelogo{
 	display: flex;
-	font-size:3rem;
+	font-size:2rem;
     justify-content: center;
     text-decoration:none;
     color:black;
@@ -47,4 +47,42 @@ table {
 
 tr:nth-child(odd) th , tr:nth-child(odd) td  {
     background-color:#c6c6c6;
+}
+
+.flexbox{
+	display: flex;
+	justify-content: center;
+	font-size:1.3rem;
+	text-align: left;
+	text-decoration: none;
+}
+
+.submit{
+    display: flex;
+    justify-content: right;
+    text-decoration: none;
+    margin-right: 200px;
+    
+}
+
+.button_s{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	width:150px;
+	height:40px;
+	background-color: white;
+	border:1px solid black;
+	color: black;
+	font-size: 1.5rem;
+	text-decoration: none;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.button_s:hover{
+	color:gray;
+    background-color:  gainsboro;
 }

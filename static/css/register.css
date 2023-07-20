@@ -33,7 +33,7 @@ body{
 
 .titlelogo{
 	display: flex;
-	font-size:3rem;
+	font-size:2rem;
     justify-content: center;
     text-decoration:none;
     color:black;
