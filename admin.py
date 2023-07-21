@@ -36,6 +36,7 @@ def correction_select():
 def correction(id):
     if 'user' in session:
         report_id=id
+        session['report_id']=report_id
         data=db.report_search(report_id)
         test=db.report_test_search(report_id)
         shutil.copy('./Project-JRMS/static/excel/Excelサンプル.xlsx','./Project-JRMS/static/excel/report_excel.xlsx')
@@ -90,8 +91,40 @@ def menu_by_confirm():
         return redirect(url_for('admin.menu'))
     else:
         return redirect(url_for('sample_top'))
-     
+
+@admin_bp.route('/correction_confirm',methods=['POST'])
+def correct_confirm():
+    if 'user' in session:
+        id=session['report_id']
+        data1=request.form.get('check_1')
+        data2=request.form.get('check_2')
+        data3=request.form.get('check_3')
+        data4=request.form.get('check_4')
+        data5=request.form.get('check_5')
+        data6=request.form.get('check_6')
+        data7=request.form.get('check_7')
+        data8=request.form.get('check_8')
+        data9=request.form.get('check_9')
+        data10=request.form.get('check_10')
+        data11=request.form.get('check_11')
+        data12=request.form.get('check_12')
+        data13=request.form.get('check_13')
+        text1=request.form.get('text_1')
+        text2=request.form.get('text_2')
+        text3=request.form.get('text_3')
+        text4=request.form.get('text_4')
+        text5=request.form.get('text_5')
+        text6=request.form.get('text_6')
+        text7=request.form.get('text_7')
+        text=f'{text1}\n{text2}\n{text3}\n{text4}\n{text5}\n{text6}\n{text7}'
+        updata_list=[data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13]
+        db.insert_report_revision(updata_list,text,id)
+        os.remove('C:/Users/ibuch/Desktop/python/Project-JRMS/static/pdf/view.pdf')
+        return redirect(url_for('admin.menu'))
+    else:
+        return redirect(url_for('sample_top'))
+
 @admin_bp.route('/logout')
 def logout():
     session.pop('user',None)
-    return redirect(url_for('sample_top'))    
+    return redirect(url_for('sample_top'))

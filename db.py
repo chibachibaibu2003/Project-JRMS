@@ -66,7 +66,7 @@ def get_hash(pw,salt):
     return hashed_pw
 
 def insert_report(date):
-    sql='insert into report values(default,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+    sql="insert into report values(default,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'')"
     try:
         connection=get_connection()
         cursor=connection.cursor()
@@ -163,6 +163,42 @@ def report_test_search(id):
         # listはタプル型です
     return list
 
-list=report_test_search(31)
-print(list[0][5])
-print(len(list))
+def report_revision_search(id):
+    sql="select revision_point from report where report_id=%s"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        list=cursor.fetchone()
+    except psycopg2.DatabaseError :
+        list=((0,0,0),)
+    finally:
+        cursor.close()
+        connection.close()
+        # listはタプル型です
+    return list
+
+def insert_report_revision(list,text,id):
+    sql='update report set revision_point = %s , correct_text=%s where report_id=%s'
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        #test_report=f'{date["report_test_1"]}\n{date["report_test_2"]}\n{date["report_test_3"]}\n{date["report_test_4"]}\n{date["report_test_5"]}\n{date["report_test_6"]}\n{date["report_test_7"]}\n{date["report_test_8"]}\n{date["report_test_9"]}\n{date["report_test_10"]}\n{date["report_test_11"]}'
+        cursor.execute(sql,(list,text,id))
+        count=cursor.rowcount
+        
+        connection.commit()
+    except psycopg2.DatabaseError:
+        count=0
+    
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
+
+list=report_revision_search(29)
+print(list[0])
+hoge=['0','0','0','0','0','0','0','0','0','0','0','0','0']
+text=""
+insert_report_revision(hoge,text,29)

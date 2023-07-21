@@ -8,41 +8,40 @@
 <a class="navbar-brand" href="{{url_for('admin.menu_by_confirm')}}">就職活動報告書管理システム<span style="color:black">　報告書添削<span>
 {% endblock %}
 
-
-
 {% block content %}
 <p class="titlelogo">報告書添削</p>
 <div class="flexbox">
     <iframe src="{{url_for('static',filename='pdf/view.pdf')}}" width="900" height="520"></iframe>
 </div>
 <br>
-<div class="correction_area">
-    <form action="{{url_for('admin.menu')}}"method="post">
-        <p style="justify-content:left">訂正場所</p><br>
+<div class="flexbox">
+    <form action="{{url_for('admin.correct_confirm')}}"method="post">
+        <a>訂正場所</a><br>
         <input type="checkbox" name="check_1"value="1">会社名
-        <input type="checkbox" name="check_2"value="2">電話番号
-        <input type="checkbox" name="check_3"value="3">所在地
-        <input type="checkbox" name="check_4"value="4">氏名
-        <input type="checkbox" name="check_5"value="5">学科・コース
-        <input type="checkbox" name="check_6"value="6">職種<br>
-        <input type="checkbox" name="check_7"value="7">業種
-        <input type="checkbox" name="check_8"value="8">応募形態
-        <input type="checkbox" name="check_9"value="9">一次
-        <input type="checkbox" name="check_10"value="10">二次
-        <input type="checkbox" name="check_11"value="11">三次
-        <input type="checkbox" name="check_12"value="12">四次<br>
-        <input type="checkbox" name="check_13"value="13">試験の内容<br>
-        <p style="justify-content:left">修正コメント</p><br>
-        <input type="text"name="text_1"autocomplete="off">
-        <input type="text"name="text_2"autocomplete="off">
-        <input type="text"name="text_3"autocomplete="off">
-        <input type="text"name="text_4"autocomplete="off">
-        <input type="text"name="text_5"autocomplete="off">
-        <input type="text"name="text_6"autocomplete="off">
-        <input type="text"name="text_7"autocomplete="off">
+        <input type="checkbox" name="check_2"value="1">電話番号
+        <input type="checkbox" name="check_3"value="1">所在地
+        <input type="checkbox" name="check_4"value="1">氏名
+        <input type="checkbox" name="check_5"value="1">学科・コース
+        <input type="checkbox" name="check_6"value="1">職種<br>
+        <input type="checkbox" name="check_7"value="1">業種
+        <input type="checkbox" name="check_8"value="1">応募形態
+        <input type="checkbox" name="check_9"value="1">一次
+        <input type="checkbox" name="check_10"value="1">二次
+        <input type="checkbox" name="check_11"value="1">三次
+        <input type="checkbox" name="check_12"value="1">四次
+        <input type="checkbox" name="check_13"value="1">試験の内容<br><br>
+        <a>修正コメント</a><br>
+        <input type="text"name="text_1"class="search_b"autocomplete="off"><br>
+        <input type="text"name="text_2"class="search_b"autocomplete="off"><br>
+        <input type="text"name="text_3"class="search_b"autocomplete="off"><br>
+        <input type="text"name="text_4"class="search_b"autocomplete="off"><br>
+        <input type="text"name="text_5"class="search_b"autocomplete="off"><br>
+        <input type="text"name="text_6"class="search_b"autocomplete="off"><br>
+        <input type="text"name="text_7"class="search_b"autocomplete="off"><br><br>
         <div class="button_box">
             <button type="button" onclick="history.back()"class="button_s">戻る</button>
-            <input type="submit"class="button_s"value="提出">
+            <input type="submit"class="button_s"value="再提出">
+            <button type="button" onclick="history.back()"class="button_s">承認</button>
         </div><br>
     </form>
 </div>

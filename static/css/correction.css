@@ -53,8 +53,17 @@ tr:nth-child(odd) th , tr:nth-child(odd) td  {
 	display: flex;
 	justify-content: center;
 	font-size:1.3rem;
-	text-align: left;
+	text-align: center;
 	text-decoration: none;
+}
+
+.search_b{
+	width: 600px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #707070;
+	margin-top:0px;
+	font-size: 1.2rem;	
 }
 
 .submit{
@@ -85,4 +94,9 @@ tr:nth-child(odd) th , tr:nth-child(odd) td  {
 .button_s:hover{
 	color:gray;
     background-color:  gainsboro;
+}
+
+.button_box{
+	display: flex;
+	justify-content: space-around;
 }
