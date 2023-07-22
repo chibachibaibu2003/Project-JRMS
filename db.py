@@ -295,10 +295,48 @@ def get_correct_text(id):
         connection.close()
         
     return data
-    
 
-list=report_revision_search(30)[0]
-wd='10'
-wd="'"+wd+"'"+','+'\u0020'
-wd=wd[:-2] + '\u0020'+','
-print(wd)
+def report_public_list(list,word):
+    sql='select company_name,submission_date,report_id from report where approval_rank=2'
+    if list[0]!="なし":
+        sql=sql+'\u0020and\u0020'+'industory='+"'"+list[0]+"'"
+    if list[1]!='なし':
+        sql=sql+'\u0020and\u0020'+'application='+"'"+list[1]+"'"
+    if word!="":
+        sql=sql+'\u0020and\u0020'+'company_name\u0020like\u0020'+"'%"+word+"%'"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql)
+        list=cursor.fetchall()
+        
+    except psycopg2.DatabaseError :
+        list=((0,0,0),(0,0,0))
+    finally:
+        cursor.close()
+        connection.close()
+        # listはlist型です
+    return list
+ 
+def delete_report_list():
+    sql='select company_name,submission_date,report_id from report where approval_rank = 2'
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql)
+        list=cursor.fetchall()
+        
+    except psycopg2.DatabaseError :
+        list=((0,0,0),(0,0,0))
+    finally:
+        cursor.close()
+        connection.close()
+        # listはlist型です
+    return list   
+
+li=["",""]
+wd=''
+list=report_public_list(li,wd)
+print(list)
+lis=delete_report_list()
+print(lis)

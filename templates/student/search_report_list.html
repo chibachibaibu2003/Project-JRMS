@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/correction.css')}}">
+{% endblock %}
+
+{% block title%}
+<a class="navbar-brand" href="{{url_for('student.menu')}}">就職活動報告書管理システム<span style="color:black">　-報告書検索<span>
+{% endblock %}
+
+{% block content %}
+<div class="submit">
+    <a class="button_s" href="{{url_for('student.menu')}}">戻る</a>
+</div>
+<div class="tablebox">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>企業名</th>
+                <th>投稿日時</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for data in datas %}
+            <tr>
+                <td><a href="{{url_for('student.correction_result',id=data[2])}}" class="button_1st">{{ data[0] }}</a></td>
+                <td><a href="{{url_for('student.correction_result',id=data[2])}}" class="button_2nd">{{ data[1] }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
