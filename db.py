@@ -133,6 +133,23 @@ def report_correction_list():
         # listはlist型です
     return list
 
+def user_report_correction_list(id):
+    sql='select company_name,submission_date,report_id from report where approval_rank = 1 and user_id=%s'
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        list=cursor.fetchall()
+        
+    except psycopg2.DatabaseError :
+        list=((0,0,0),(0,0,0))
+    finally:
+        cursor.close()
+        connection.close()
+        # listはlist型です
+    return list
+    
+
 def report_search(id):
     sql="select * from report where report_id=%s"
     try:
@@ -183,7 +200,6 @@ def insert_report_revision(list,text,id):
     try:
         connection=get_connection()
         cursor=connection.cursor()
-        #test_report=f'{date["report_test_1"]}\n{date["report_test_2"]}\n{date["report_test_3"]}\n{date["report_test_4"]}\n{date["report_test_5"]}\n{date["report_test_6"]}\n{date["report_test_7"]}\n{date["report_test_8"]}\n{date["report_test_9"]}\n{date["report_test_10"]}\n{date["report_test_11"]}'
         cursor.execute(sql,(list,text,id))
         count=cursor.rowcount
         
@@ -197,8 +213,92 @@ def insert_report_revision(list,text,id):
         
     return count
 
-list=report_revision_search(29)
-print(list[0])
-hoge=['0','0','0','0','0','0','0','0','0','0','0','0','0']
-text=""
-insert_report_revision(hoge,text,29)
+def report_approval(id,flag):
+    sql='update report set approval_rank=%s where report_id=%s'
+    if flag==1:
+        rank=1
+    elif flag==2:
+        rank=2
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(rank,id))
+        count=cursor.rowcount
+        
+        connection.commit()
+    except psycopg2.DatabaseError:
+        count=0
+    
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
+
+def update_report(list,id):
+    sql1="update report set\u0020"
+    sql2="name="
+    sql3="study_course="
+    sql4="company_name="
+    sql5="tell_num="
+    sql6="location="
+    sql7="occupation="
+    sql8="industory="
+    sql9="application="
+    sql14="test_report="
+    sql15="where report_id=%s"
+    revi=report_revision_search(id)[0]
+    if revi[0]=='1':
+        sql1=sql1+sql4+"'"+list[0]+"'"+','+'\u0020'
+    if revi[1]=='1':
+        #list[1]はstr型
+        sql1=sql1+sql5+"'"+list[1]+"'"+','+'\u0020'
+    if revi[2]=='1':
+        sql1=sql1+sql6+"'"+list[2]+"'"+','+'\u0020'
+    if revi[3]=='1':
+        sql1=sql1+sql2+"'"+list[3]+"'"+','+'\u0020'
+    if revi[4]=='1':
+        sql1=sql1+sql3+"'"+list[4]+"'"+','+'\u0020'
+    if revi[5]=='1':
+        sql1=sql1+sql7+"'"+list[1]+"'"+','+'\u0020'
+    if revi[6]=='1':
+        sql1=sql1+sql8+"'"+list[6]+"'"+','+'\u0020'
+    if revi[7]=='1':
+        sql1=sql1+sql9+"'"+list[7]+"'"+','+'\u0020'
+    if revi[12]=='1':
+        sql1=sql1+sql14+"'"+list[8]+"'"+','+'\u0020'
+    sql1=sql1[:-2]+'\u0020'+sql15
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql1,(id,))
+        count=cursor.rowcount
+        connection.commit()
+    except psycopg2.DatabaseError :
+        count=0
+    finally:
+        cursor.close()
+        connection.close()
+    return count
+
+def get_correct_text(id):
+    sql="select correct_text from report where report_id=%s"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        data=cursor.fetchone()
+    except psycopg2.DatabaseError:
+        data=""
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return data
+    
+
+list=report_revision_search(30)[0]
+wd='10'
+wd="'"+wd+"'"+','+'\u0020'
+wd=wd[:-2] + '\u0020'+','
+print(wd)

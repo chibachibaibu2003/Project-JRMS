@@ -154,6 +154,59 @@ def menu_by_confirm():
         return redirect(url_for('student.menu'))
     else:
         return redirect(url_for('sample_top'))
+    
+@student_bp.route('/correction')
+def correction_select():
+    if 'user' in session:
+        id=session['user_id']
+        data_list=db.user_report_correction_list(id)
+        return render_template('student/correction_select.html',datas=data_list)
+    else:
+        return redirect(url_for('sample_top'))
+
+@student_bp.route('/correction_2/<int:id>')
+def correction(id):
+    if 'user' in session:
+        revision=db.report_revision_search(id)[0]
+        session['revision']=revision
+        session['report_id']=id
+        text=db.get_correct_text(id)[0]
+        li=[]
+        for str in text.split('\n'):
+            li.append(str)
+        return render_template('student/correction.html',datas=revision,texts=li)
+    else:
+        return redirect(url_for('sample_top'))
+    
+@student_bp.route('/correction3',methods=['POST'])
+def correction_confirm():
+    if 'user' in session:
+        id=session['report_id']
+        company_name=request.form.get('company_name')
+        tel_num=request.form.get('company_tel')
+        location=request.form.get('company_location')
+        name=request.form.get('name')
+        study_course=request.form.get('course')
+        occupation=request.form.get('occupation')
+        industory=request.form.get('industory')
+        application=request.form.get('application')
+        report1=request.form.get('report_test_1')
+        report2=request.form.get('report_test_2')
+        report3=request.form.get('report_test_3')
+        report4=request.form.get('report_test_4')
+        report5=request.form.get('report_test_5')
+        report6=request.form.get('report_test_6')
+        report7=request.form.get('report_test_7')
+        report8=request.form.get('report_test_8')
+        report9=request.form.get('report_test_9')
+        report10=request.form.get('report_test_10')
+        report11=request.form.get('report_test_11')
+        text=f'{report1}\n{report2}\n{report3}\n{report4}\n{report5}\n{report6}\n{report7}\n{report8}\n{report9}\n{report10}\n{report11}'
+        li=[company_name,tel_num,location,name,study_course,occupation,industory,application,text]
+        db.update_report(li,id)
+        return render_template('student/top.html')
+    else:
+        return redirect(url_for('sample_top'))
 
 @student_bp.route('/logout')
 def logout():

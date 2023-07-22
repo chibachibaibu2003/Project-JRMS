@@ -39,9 +39,9 @@
         <input type="text"name="text_6"class="search_b"autocomplete="off"><br>
         <input type="text"name="text_7"class="search_b"autocomplete="off"><br><br>
         <div class="button_box">
-            <button type="button" onclick="history.back()"class="button_s">戻る</button>
+            <a class="button_s" href="{{url_for('admin.menu_by_confirm')}}">戻る</a>
             <input type="submit"class="button_s"value="再提出">
-            <button type="button" onclick="history.back()"class="button_s">承認</button>
+            <a class="button_s" href="{{url_for('admin.approval')}}">承認</a>
         </div><br>
     </form>
 </div>

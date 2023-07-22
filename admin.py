@@ -96,6 +96,7 @@ def menu_by_confirm():
 def correct_confirm():
     if 'user' in session:
         id=session['report_id']
+        rank=1
         data1=request.form.get('check_1')
         data2=request.form.get('check_2')
         data3=request.form.get('check_3')
@@ -119,6 +120,18 @@ def correct_confirm():
         text=f'{text1}\n{text2}\n{text3}\n{text4}\n{text5}\n{text6}\n{text7}'
         updata_list=[data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13]
         db.insert_report_revision(updata_list,text,id)
+        db.report_approval(id,rank)
+        os.remove('C:/Users/ibuch/Desktop/python/Project-JRMS/static/pdf/view.pdf')
+        return redirect(url_for('admin.menu'))
+    else:
+        return redirect(url_for('sample_top'))
+
+@admin_bp.route('/approval')
+def approval():
+    if 'user' in session:
+        id=session['report_id']
+        rank=2
+        db.report_approval(id,rank)
         os.remove('C:/Users/ibuch/Desktop/python/Project-JRMS/static/pdf/view.pdf')
         return redirect(url_for('admin.menu'))
     else:

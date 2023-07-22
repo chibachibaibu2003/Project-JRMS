@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/user_register.css')}}">
+{% endblock %}
+
+{% block title%}
+<a class="navbar-brand" href="{{url_for('student.menu')}}">就職活動報告書管理システム<span style="color:black">　報告書修正<span>
+{% endblock %}
+
+{% block content %}
+{% if error != null%}
+	<a style="color:red"class="msg">{{error}}</a><br>
+{% endif %}
+<div class="flexbox">
+    <form action="{{url_for('student.correction_confirm')}}"method="post"><br><br>
+        <a>修正コメント</a><br>
+        <input type="text" name="correct_text_1"class="search_b"value="{{texts[0]}}" readonly><br>
+        <input type="text" name="correct_text_2"class="search_b"value="{{texts[1]}}" readonly><br>
+        <input type="text" name="correct_text_3"class="search_b"value="{{texts[2]}}" readonly><br>
+        <input type="text" name="correct_text_4"class="search_b"value="{{texts[3]}}" readonly><br>
+        <input type="text" name="correct_text_5"class="search_b"value="{{texts[4]}}" readonly><br>
+        <input type="text" name="correct_text_6"class="search_b"value="{{texts[5]}}" readonly><br>
+        <input type="text" name="correct_text_7"class="search_b"value="{{texts[6]}}" readonly><br>
+        <br>
+        {% if datas[3]=='1'%}
+            <a>氏名</a><br>
+            <input type="text" name="name"class="search_a"autocomplete="off"><br>
+        {%endif%}
+        {% if datas[4]=='1'%}
+            <a>学科・コース</a><br>
+            <select name="course" required>
+                <option value="">選択してください</option>
+                <option value="情報システム科">情報システム科</option>
+                <option value="情報ビジネス科">情報ビジネス科</option>
+                <option value="高度情報工学科">高度情報工学科</option>
+                <option value="総合デザイン科">総合デザイン科</option>
+                <option value="デザイン科">デザイン科</option>
+                <option value="ゲームクリエイター科">ゲームクリエイター科</option>
+            </select><br>
+        {%endif%}
+        {% if datas[0]=='1'%}
+            <a>会社名</a><br>
+            <input type="text" name="company_name"class="search_a"autocomplete="off"><br>
+        {%endif%}
+        {% if datas[1]=='1'%}
+            <a>会社の電話番号</a><br>
+            <input type="text" name="company_tel"class="search_a"autocomplete="off"><br>
+        {%endif%}
+        {% if datas[2]=='1'%}
+            <a>所在地</a><br>
+            <input type="text" name="company_location"class="search_a"autocomplete="off"><br>
+        {%endif%}
+        {% if datas[5]=='1'%}
+            <a>職種</a><br>
+            <input type="text" name="occupation"class="search_a"autocomplete="off"><br><br>
+        {%endif%}
+        {% if datas[6]=='1'%}
+            <div class="button_box">
+                <a>業種</a><br>
+                <select name="industory" required>
+                    <option value="">選択してください</option>
+                    <option value="IT">IT</option>
+                    <option value="商社">商社</option>
+                    <option value="金融">金融</option>
+                    <option value="広告・出版">広告・出版</option>
+                    <option value="サービス・インフラ">サービス・インフラ</option>
+                    <option value="その他">その他</option>
+                </select><br>
+            </div><br><br>
+        {%endif%}
+        {% if datas[7]=='1'%}
+            <div class="button_box">
+                <a>応募形態</a><br>
+                <select name="application" required>
+                    <option value="">選択してください</option>
+                    <option value="学校">学校</option>
+                    <option value="自己開拓">自己開拓</option>
+                    <option value="縁故">縁故</option>
+                </select>
+            </div><br><br>
+        {%endif%}
+        {% if datas[12]=='1'%}
+            <a>試験内容</a><br>
+            <input type="text" name="report_test_1"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_2"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_3"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_4"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_5"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_6"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_7"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_8"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_9"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_10"class="search_b"autocomplete="off"><br>
+            <input type="text" name="report_test_11"class="search_b"autocomplete="off"><br><br>
+        {%endif%}
+        <div class="button_box">
+            <button type="button" onclick="history.back()"class="button_s">戻る</button>
+            <input type="submit"class="button_s"value="提出">
+        </div><br>
+    </form>
+</div>
+
+{% endblock %}
