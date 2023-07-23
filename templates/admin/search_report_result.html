@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/user_register.css')}}">
+{% endblock %}
+
+{% block title%}
+<a class="navbar-brand" href="{{url_for('admin.menu_by_confirm')}}">就職活動報告書管理システム<span style="color:black">　報告書確認<span>
+{% endblock %}
+
+{% block content %}
+<div class="flexbox">
+    <iframe src="{{url_for('static',filename='pdf/view.pdf')}}" width="900" height="520"></iframe>
+</div>
+<br>
+<div class="flexbox">
+    <a class="button_s" href="{{url_for('admin.menu_by_confirm')}}">戻る</a>
+</div>
+{% endblock %}

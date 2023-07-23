@@ -334,6 +334,40 @@ def delete_report_list():
         # listはlist型です
     return list   
 
+def delete_report(id):
+    sql="delete from report where report_id=%s"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        count=cursor.rowcount
+        connection.commit()
+        
+    except psycopg2.DatabaseError :
+        count=0
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
+
+def delete_report_test(id):
+    sql="delete from report_test where report_id=%s"
+    try:
+        connection=get_connection()
+        cursor=connection.cursor()
+        cursor.execute(sql,(id,))
+        count=cursor.rowcount
+        connection.commit()
+        
+    except psycopg2.DatabaseError :
+        count=0
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count 
+
 li=["",""]
 wd=''
 list=report_public_list(li,wd)

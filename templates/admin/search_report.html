@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/search.css')}}">
+{% endblock %}
+
+{% block title%}
+<a class="navbar-brand" href="{{url_for('admin.menu')}}">就職活動報告書管理システム<span style="color:black">　-報告書検索<span>
+{% endblock %}
+
+{% block content %}
+<div class="flexbox">
+    <form action="{{url_for('admin.search_report_list')}}"method="post">
+        <input type="text"name="search_box" value=""class="search_box"autocomplete="off">
+        <input type="submit"class="button_s"value="検索"><br>
+        <div class="container">    
+            <div class="buttonbox">
+                業種<br>
+                <select name="industory">
+                    <option value="なし">検索候補</option>
+                    <option value="IT">IT</option>
+                    <option value="商社">商社</option>
+                    <option value="金融">金融</option>
+                    <option value="広告・出版">広告・出版</option>
+                    <option value="サービス・インフラ">サービス・インフラ</option>
+                    <option value="その他">その他</option>
+                </select><br>
+            </div>
+            <div class="buttonbox">
+                応募形態<br>
+                <select name="application">
+                    <option value="なし">検索候補</option>
+                    <option value="学校">学校</option>
+                    <option value="自己開拓">自己開拓</option>
+                    <option value="縁故">縁故</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+{%endblock%}

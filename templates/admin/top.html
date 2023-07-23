@@ -19,11 +19,15 @@
 <div class="flexbox">
     <div class="buttonbox">
         報告書検索
-        <a href="{{url_for('admin.menu')}}"></a>
+        <a href="{{url_for('admin.search_report')}}"></a>
     </div>
     <div class="buttonbox">
         報告書添削
         <a href="{{url_for('admin.correction_select')}}"></a>
+    </div>
+    <div class="buttonbox">
+        報告書削除
+        <a href="{{url_for('admin.delete_report_select')}}"></a>
     </div>
     <div class="buttonbox">
         ログアウト
