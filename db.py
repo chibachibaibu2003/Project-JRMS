@@ -260,7 +260,7 @@ def update_report(list,id):
     if revi[4]=='1':
         sql1=sql1+sql3+"'"+list[4]+"'"+','+'\u0020'
     if revi[5]=='1':
-        sql1=sql1+sql7+"'"+list[1]+"'"+','+'\u0020'
+        sql1=sql1+sql7+"'"+list[5]+"'"+','+'\u0020'
     if revi[6]=='1':
         sql1=sql1+sql8+"'"+list[6]+"'"+','+'\u0020'
     if revi[7]=='1':
